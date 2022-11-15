@@ -1,0 +1,5 @@
+<h1><%= @airline.name %>, Show Page<h1>
+<br>
+<% @passengers_and_flights.each do |passenger_and_flight| %>
+    <p><%= passenger_and_flight[0][1] %>, trips: <%= passenger_and_flight[1] %></p>
+<% end %>
