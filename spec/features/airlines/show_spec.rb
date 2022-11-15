@@ -56,9 +56,19 @@ RSpec.describe 'Show' do
     FlightPassenger.create!(flight_id: @flight3.id, passenger_id: @passenger2.id)
 
     visit "/airlines/#{@airline1.id}"
-    save_and_open_page
     expect("William, trips: 3").to appear_before("Joseph, trips: 2")
     expect("Joseph, trips: 2").to appear_before("Daniel, trips: 1")
     end
+  end
+  describe 'extra'
+  it 'doesnt list passengers from flights on a differnt airline' do
+    @airline2 = Airline.create!(name: "Spirit Airlines")
+    flight = Flight.create!(number: 5, departure_city: 'Charlotte', arrival_city: 'Colorado', airline_id: @airline2.id)
+    passenger = Passenger.create!(name: 'David', age: 65)
+    FlightPassenger.create!(flight_id: flight.id, passenger_id: passenger.id)
+    
+    visit "/airlines/#{@airline1.id}"
+    save_and_open_page
+    expect(page).to_not have_content("David, trips: 1")
   end
  end
