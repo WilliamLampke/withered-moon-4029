@@ -6,5 +6,6 @@
     <% flight.flight_passengers.each do |flight_passenger| %>
         
         <p><%= flight_passenger.passenger.name %></p>
+        <%= link_to "Delete #{flight_passenger.passenger.name} #{flight_passenger.id}", "/flight_passengers/#{flight_passenger.id}", method: "delete"%>
     <% end %>
 <% end %>
